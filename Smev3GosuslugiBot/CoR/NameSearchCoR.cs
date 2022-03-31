@@ -1,38 +1,24 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using Smev3GosuslugiBot.Properties;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
 namespace Smev3GosuslugiBot.CoR
 {
-    public class NameSearchCoR
+    public class NameSearchCoR : ElementInCoR
     {
-        
-    }
-
-    public abstract class ElementInCoR
-    {
-        protected IMessageReceiver MessageReceiver { get; }
-        
-        private ElementInCoR? _next;
-
-        public ElementInCoR(IMessageReceiver messageReceiver)
+        public NameSearchCoR(IMessageReceiver messageReceiver) : base(messageReceiver)
         {
-            MessageReceiver = messageReceiver;
-        }        
-        
-        public ElementInCoR SetNext(ElementInCoR next)
-        {
-            _next = next;
-            return _next;
         }
 
-        public async Task HandleUpdate(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
+        protected override async Task<bool> HandlingUpdate(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
         {
-            if (await HandlingUpdate(botClient, update, cancellationToken))
-                return;
+            if (update.CallbackQuery?.Data != nameof(Resources.SearchByName)) 
+                return false;
+            
+            await botClient.SendTextMessageAsync(update.GetChat(), "Поиск по имени");
+            return true;
         }
-        
-        protected abstract Task<bool> HandlingUpdate(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken);
     }
 }
