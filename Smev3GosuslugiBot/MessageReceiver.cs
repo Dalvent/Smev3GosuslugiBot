@@ -20,8 +20,8 @@ namespace Smev3GosuslugiBot
         {
             _statePool = new Dictionary<Type, IState>
             {
-                { typeof(ISetupState), new SetupState(this) },
-                { typeof(IHelloState), new HelloState(this) }
+                { typeof(SetupState), new SetupState(this) },
+                { typeof(HelloState), new HelloState(this) }
             };
         }
 
@@ -34,8 +34,8 @@ namespace Smev3GosuslugiBot
             Chat messageChat = update.GetChat();
             if (!_stateOfPersons.TryGetValue(messageChat.Id, out userState))
             {
-                EnterStateOf<ISetupState>(botClient, update, cancellationToken);
-                userState = StateInstanceOf<ISetupState>();
+                EnterStateOf<SetupState>(botClient, update, cancellationToken);
+                userState = StateInstanceOf<SetupState>();
             }
 
             await userState.Update(botClient, update, cancellationToken);
@@ -49,6 +49,9 @@ namespace Smev3GosuslugiBot
 
         public void EnterStateOf<TState>(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken) where TState : IState
         {
+            if(_stateOfPersons.TryGetValue(update.GetUser().Id, out IState state))
+                state.Exit(botClient, update, cancellationToken);
+            
             TState stateInstanceOf = StateInstanceOf<TState>();
             _stateOfPersons[update.GetUser().Id] = stateInstanceOf;
             stateInstanceOf.Enter(botClient, update, cancellationToken);

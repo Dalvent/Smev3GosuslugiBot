@@ -9,5 +9,6 @@ namespace Smev3GosuslugiBot.State
     {
         Task Enter(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken);
         Task Update(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken);
+        Task Exit(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken);
     }
 }

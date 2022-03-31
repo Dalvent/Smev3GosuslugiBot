@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Smev3GosuslugiBot.CoR;
 using Smev3GosuslugiBot.State;
 using Telegram.Bot;
 using Telegram.Bot.Extensions.Polling;
