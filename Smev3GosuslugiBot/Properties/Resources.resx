@@ -123,4 +123,19 @@
   <data name="SearchByParameters" xml:space="preserve">
     <value>Поиск по параметрам</value>
   </data>
+  <data name="FederalLevel" xml:space="preserve">
+    <value>Федеральный уровень</value>
+  </data>
+  <data name="RegionLevel" xml:space="preserve">
+    <value>Региональный уровень</value>
+  </data>
+  <data name="ChooseEnvironment" xml:space="preserve">
+    <value>Выбрать среду</value>
+  </data>
+  <data name="TestEnvironment" xml:space="preserve">
+    <value>Тестовая среда</value>
+  </data>
+  <data name="ProductiveEnvironment" xml:space="preserve">
+    <value>Продуктивная среда</value>
+  </data>
 </root>

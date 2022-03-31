@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Smev3GosuslugiBot.State;
+using Smev3GosuslugiBot.State.SearchByParameters;
 using Telegram.Bot;
 using Telegram.Bot.Extensions.Polling;
 using Telegram.Bot.Types;
@@ -21,7 +22,13 @@ namespace Smev3GosuslugiBot
             _statePool = new Dictionary<Type, IState>
             {
                 { typeof(SetupState), new SetupState(this) },
-                { typeof(HelloState), new HelloState(this) }
+                { typeof(HelloState), new HelloState(this) },
+                { typeof(TypeInformationLevelState), new TypeInformationLevelState(this) },
+                { typeof(SearchByParametersState), new SearchByParametersState(this) },
+                { typeof(WriteIdState), new WriteIdState(this) },
+                { typeof(ChooseEnvironmentState), new ChooseEnvironmentState(this) },
+                { typeof(ChooseSubjectState), new ChooseSubjectState(this) },
+                { typeof(ContextOfUseState), new ContextOfUseState(this) },
             };
         }
 

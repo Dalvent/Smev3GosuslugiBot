@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Smev3GosuslugiBot.Properties;
+using Smev3GosuslugiBot.State.SearchByParameters;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
@@ -46,13 +47,14 @@ namespace Smev3GosuslugiBot.State
             if(update.Message == null)
                 return;
             
-            if (update.Message.Text != nameof(Resources.SearchByName))
+            if (update.Message.Text == Resources.SearchByName)
             {
                 await botClient.SendTextMessageAsync(update.GetChat(), Resources.SearchByName);
             }
-            else if (update.Message.Text != nameof(Resources.SearchByParameters))
+            else if (update.Message.Text == Resources.SearchByParameters)
             {
-                await botClient.SendTextMessageAsync(update.GetChat(), Resources.SearchByParameters);
+                _messageReceiver.EnterStateOf<SearchByParametersState>(botClient, update, cancellationToken);
+                // await botClient.SendTextMessageAsync(update.GetChat(), Resources.SearchByParameters);
             }
             else
             {

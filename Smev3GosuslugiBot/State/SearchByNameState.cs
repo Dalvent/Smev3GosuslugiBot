@@ -26,7 +26,7 @@ namespace Smev3GosuslugiBot.State
             })
             {
                 ResizeKeyboard = true,
-                Selective = true
+                Selective = true,
             };
 
             await botClient.SendTextMessageAsync(update.GetChat(), "выфвфыв", replyMarkup: keyboard, cancellationToken: cancellationToken);
@@ -35,7 +35,7 @@ namespace Smev3GosuslugiBot.State
 
         public Task Update(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
         {
-            
+            return Task.CompletedTask;
         }
 
         public Task Exit(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
